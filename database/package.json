@@ -1,0 +1,29 @@
+{
+  "name": "twitter-crime-visualisation",
+  "version": "0.0.1",
+  "description": "Final year project (Team WitnessUS)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheevu-RS/twitter-crime-visualisation.git"
+  },
+  "keywords": [
+    "twitter",
+    "crime",
+    "nlp",
+    "bigdata"
+  ],
+  "author": "Mohamed Sohail <mohamedsohailazim@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/cheevu-RS/twitter-crime-visualisation/issues"
+  },
+  "homepage": "https://github.com/cheevu-RS/twitter-crime-visualisation#readme",
+  "dependencies": {
+    "knex": "^0.95.2",
+    "pg": "^8.5.1"
+  }
+}
