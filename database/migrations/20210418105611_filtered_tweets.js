@@ -23,7 +23,6 @@ exports.up = (knex) => {
         .index();
       table.string("tweet_id");
       table.string("tweet", 1024);
-      table.boolean("is_ok").defaultsTo(false);
       table.string("tweet_date");
       table.timestamps(true, true);
     });
