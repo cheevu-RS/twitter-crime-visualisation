@@ -1,9 +1,8 @@
 # database
-database/node_modules
 beekeeper
 .DS_Store
 datasets
-yarn.lock
-package-lock.json
-node_modules
+**/yarn.lock
+**/package-lock.json
+**/node_modules
 
