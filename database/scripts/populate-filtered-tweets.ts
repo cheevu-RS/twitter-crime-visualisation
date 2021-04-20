@@ -27,7 +27,7 @@ function GetPercentageWords(t: string, words: string[]) {
 function FindCategory(t: string) {
   const tweet = t.toLowerCase();
   let mxPercentage = 0.0;
-  let cat = "Other";
+  let cat = "NonCrime";
   for (const [category, words] of Object.entries(Categories)) {
     const percentage = GetPercentageWords(tweet, words);
     if (percentage > mxPercentage) {
@@ -59,44 +59,37 @@ async function InsertCategories(db: Knex) {
     } as Category;
   });
   console.log(categories);
-  await go(db("categories").insert(categories));
+  await go(db("categories_two").insert(categories));
 }
 
 async function main(): Promise<void> {
   // @ts-ignore
   const db = knex(config.development);
-  await InsertCategories(db);
+  // await InsertCategories(db);
 
   // @ts-ignore
   const tweets: Tweet[] = await go(db.select("*").from("tweets"));
   // @ts-ignore
-  const categories: Category[] = await go(db.select("*").from("categories"));
+  const categories: Category[] = await go(db.select("*").from("categories_two"));
 
   console.log(categories);
-  // LogCounts(tweets);
+  LogCounts(tweets);
 
-  const count = new Map<string, number>();
-  for (const [category, _] of Object.entries(Categories)) {
-    count.set(category, 0);
-  }
-
+  
   let done = 0;
   for (const tweet of tweets) {
     const category = FindCategory(tweet.tweet);
-    const cnt = count.get(category)!;
-    if (category === "Other" || cnt >= 100) continue;
-    count.set(category, cnt + 1);
+    if (category === "NonCrime") continue;
     const categoryId = categories.find((c) => c.category_name === category)!.id;
     const t = {
       ...tweet,
       category: categoryId,
     } as FilteredTweet;
-    await go(db("filtered_tweets").insert(t));
+    await go(db("filtered_tweets_two").insert(t));
     done += 1;
     if (done % 100 === 0) console.log('✅', done);
   }
 
-  console.log(count);
 }
 
 main();

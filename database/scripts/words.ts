@@ -7,23 +7,12 @@ export const AntiSocialBehaviour = [
   "urinating in public",
   "drunk",
   "spitting",
+  "paan",
+  "urinating",
+  "anti mask"
 ];
 
-export const BikeTheft = [
-  "bike theft",
-  "bike nicked",
-  "bike stolen",
-  "bicycle nicked",
-  "bicycle stole",
-  "bike gone",
-  "stole bike",
-  "bike lock",
-  "stole cycle",
-  "sucker pole",
-  "bike thief",
-  "bike",
-];
-export const Burglary = [
+export const Theft = [
   "burglary",
   "breaking and entering",
   "housebreaking",
@@ -35,6 +24,41 @@ export const Burglary = [
   "burgle",
   "burglaries",
   "stole",
+  "theft",
+  "nicked",
+  "stolen",
+  "mugged",
+  "pickpocket",
+  "snatched",
+  "theft from the person",
+  "thieving",
+  "stealing",
+  "stole",
+  "filching",
+  "taking property",
+  "handbag taken",
+  "shoplift",
+  "shoplifting",
+  "boosting",
+  "five finger discount",
+  "shoplifter",
+  "stealing",
+  "nicked from shop",
+  "take without paying",
+  "stolen goods",
+  "stole",
+  "thief",
+  "lifting",
+  "robbery",
+  "threat",
+  "armed robbery",
+  "highway robbery",
+  "aggravated robbery",
+  "steal",
+  "blagging",
+  "stick-up",
+  "violent theft",
+  "mugging",
 ];
 export const CriminalDamage = [
   "vandalism",
@@ -66,6 +90,8 @@ export const DrugOffences = [
   "LSD",
   "amphetamine",
   "ketamine",
+  "ganja",
+  "marijuana"
 ];
 
 export const PossessionOfWeapons = [
@@ -92,54 +118,11 @@ export const PublicOrder = [
   "racial",
   "racist",
   "religious hatred",
-];
-
-export const Robbery = [
-  "robbery",
-  "threat",
-  "armed robbery",
-  "highway robbery",
-  "aggravated robbery",
-  "steal",
-  "blagging",
-  "stick-up",
-  "violent theft",
-  "mugging",
-  "car jacking",
-];
-
-export const Shoplifting = [
-  "shoplift",
-  "shoplifting",
-  "boosting",
-  "five finger discount",
-  "shoplifter",
-  "stealing",
-  "nicked from shop",
-  "take without paying",
-  "stolen goods",
-  "stole",
-  "thief",
-  "lifting",
-];
-
-export const TheftFromThePerson = [
-  "theft",
-  "nicked",
-  "stolen",
-  "mugged",
-  "pickpocket",
-  "snatched",
-  "theft from the person",
-  "thieving",
-  "stealing",
-  "stole",
-  "filching",
-  "taking property",
-  "handbag taken",
+  "hate speech"
 ];
 
 export const VehicleCrime = [
+  "car jacking",
   "vehicle crime",
   "stolen car",
   "car nicked",
@@ -171,6 +154,7 @@ export const ViolentCrime = [
   "punched",
   "assault",
   "robbery",
+  "assassination",
   "homicide",
   "wounding",
   "domestic violence",
@@ -178,6 +162,7 @@ export const ViolentCrime = [
   "murder",
   "murdered",
   "killed",
+  "kills",
   "manslaughter",
   "infanticide",
   "sexual assault",
@@ -187,22 +172,52 @@ export const ViolentCrime = [
   "GBH",
   "harassment",
   "stalking",
+  "sharp-edged"
+];
+export const CyberCrime = [
+  "phishing",
+  "cyber stalk",
+  "cyber crime",
+  "extortion",
+  "bioterrorism",
+  "copyright infringement",
+  "child porn",
+  "porn",
+  "ddos",
+  "piracy",
+  "pirating",
+  "malware",
+  "ransomware",
+  "hackers",
+  "hacking",
+  "dark web",
+  "silk road",
 ];
 
-export const Other = [];
+export const Terrorism = [
+  "terrorism",
+  "terrorist",
+  "isis",
+  "al-qaida",
+  "suicide bomber",
+  "taliban",
+  "naxal",
+  "indian mujahideen",
+  "maoist"
+];
+
+export const NonCrime = [];
 
 export const Categories = {
   AntiSocialBehaviour,
-  BikeTheft,
-  Burglary,
+  Theft,
   CriminalDamage,
   DrugOffences,
   PossessionOfWeapons,
   PublicOrder,
-  Robbery,
-  Shoplifting,
-  TheftFromThePerson,
   VehicleCrime,
   ViolentCrime,
-  Other,
+  CyberCrime,
+  Terrorism,
+  NonCrime
 };
