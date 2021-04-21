@@ -42,7 +42,7 @@ def preprocess_string(stri):
 stop_words = set(stopwords.words('english'))
 stop_words.update("amp","","th")
 
-TRAIN_DATASET_PATH = "../datasets/750_tweets_with_category.csv"
+TRAIN_DATASET_PATH = "../datasets/crime_non_crime.csv"
 tweets = pd.read_csv(TRAIN_DATASET_PATH)
 
 for i,v in enumerate(tweets['tweet']):
