@@ -31,10 +31,18 @@ def lemmatize_text(text):
  return [(lemmatizer.lemmatize(w)) for w in \
                                      w_tokenizer.tokenize((text))]
 
+def preprocess_string(stri):
+    stri = p.clean(stri)
+    stri = re.sub('\d+','',stri)
+    stri = re.sub('[^\w\s]',' ',stri)
+    stri = lemmatize_text(stri)
+    stri = ' '.join([item.lower() for item in stri if item not in stop_words])
+    return stri
+
 stop_words = set(stopwords.words('english'))
 stop_words.update("amp","","th")
 
-TRAIN_DATASET_PATH = "../datasets/250tweets-dataset.csv"
+TRAIN_DATASET_PATH = "../datasets/750_tweets_with_category.csv"
 tweets = pd.read_csv(TRAIN_DATASET_PATH)
 
 for i,v in enumerate(tweets['tweet']):
@@ -51,7 +59,7 @@ tweets['text'] = tweets['text'].apply(lambda x: ' '.join([item for item in x if 
 # for i in range(len(tweets)):
 #     print(tweets['tweet'][i])
 #     print(tweets['text'][i])
-    
+# print(preprocess_string("Bihar: Three masked persons robbed a jewellery shop at gunpoint in Patna Robbers entered the shop in the presence of customers. One of them pointed a gun at the attendant & snatched gold chains from his hand. An accused dropped a gun in the shop. Probe on, said police (02.03)"))
 samples = tweets['text'].to_list()
 labels = tweets['category'].to_list()
-class_names = ["AntiSocialBehaviour","BikeTheft","Burglary","CriminalDamage","DrugOffences","PossessionOfWeapons","PublicOrder","Robbery","Shoplifting","TheftFromThePerson","VehicleCrime","ViolentCrime","Other","Terrorism"]
+class_names = ["AntiSocialBehaviour","Theft","CriminalDamage","DrugOffences","PossessionOfWeapons","PublicOrder","VehicleCrime","ViolentCrime","CyberCrime","Terrorism","NonCrime"]

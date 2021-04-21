@@ -6,7 +6,7 @@ from tensorflow.keras.layers.experimental.preprocessing import TextVectorization
 from preprocess_tweets import samples, labels, class_names
 from tensorflow.keras.layers import Embedding
 from tensorflow.keras import layers
-
+from tensorflow.keras import regularizers
 print(samples[0])
 
 # Shuffle the data
@@ -73,13 +73,16 @@ embedding_layer = Embedding(
 
 int_sequences_input = keras.Input(shape=(None,), dtype="int64")
 embedded_sequences = embedding_layer(int_sequences_input)
-x = layers.Conv1D(128, 5, activation="relu")(embedded_sequences)
+x = layers.Conv1D(128, 3, activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4))(embedded_sequences)
 x = layers.MaxPooling1D(5)(x)
-x = layers.Conv1D(128, 5, activation="relu")(x)
+x = layers.Conv1D(128, 5, activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4))(x)
 x = layers.MaxPooling1D(5)(x)
-x = layers.Conv1D(128, 5, activation="relu")(x)
+x = layers.Conv1D(128, 5, activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4))(x)
 x = layers.GlobalMaxPooling1D()(x)
-x = layers.Dense(128, activation="relu")(x)
+x = layers.Dense(128, activation="relu",     
+    kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4),
+    bias_regularizer=regularizers.l2(1e-4),
+    activity_regularizer=regularizers.l2(1e-5))(x)
 x = layers.Dropout(0.5)(x)
 preds = layers.Dense(len(class_names)+1, activation="softmax")(x)
 model = keras.Model(int_sequences_input, preds)
@@ -94,15 +97,16 @@ y_val = np.array(val_labels)
 model.compile(
     loss="sparse_categorical_crossentropy", optimizer="rmsprop", metrics=["acc"]
 )
-model.fit(x_train, y_train, batch_size=128, epochs=20, validation_data=(x_val, y_val))
+model.fit(x_train, y_train, batch_size=32, epochs=20, validation_data=(x_val, y_val))
 
 string_input = keras.Input(shape=(1,), dtype="string")
 x = vectorizer(string_input)
 preds = model(x)
 end_to_end_model = keras.Model(string_input, preds)
+end_to_end_model.save("tweet_crime_classifier_model")
 
-probabilities = end_to_end_model.predict(
-    [["Odisha: Police seized 880 kgs ganja worth Rs 70 lakhs &amp; arrested 4 people in Malkangiri last night.   Police seized 880.45 kgs of cannabis from a car, which was being transported to Raipur. Police have initiated a probe into the matter, says Malkangiri SDPO Ansuman Dwibedi.  https://t.co/VXQhPrxeg6"]]
-)
+# probabilities = end_to_end_model.predict(
+#     [["bihar three masked person robbed jewellery shop gunpoint patna robbers entered shop presence customer one pointed gun attendant snatched gold chain hand an accused dropped gun shop probe said police"]]
+# )
 
-print(class_names[np.argmax(probabilities[0])])
+# print(class_names[np.argmax(probabilities[0])-1])
