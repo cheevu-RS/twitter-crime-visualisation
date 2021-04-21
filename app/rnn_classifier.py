@@ -33,7 +33,7 @@ voc = vectorizer.get_vocabulary()
 word_index = dict(zip(voc, range(len(voc))))
 
 path_to_glove_file = os.path.join(
-    os.curdir, "../datasets/glove.twitter.27B.200d.txt"
+    os.curdir, "../datasets/glove.twitter.27B.100d.txt"
 )
 
 embeddings_index = {}
@@ -94,11 +94,15 @@ x_val = vectorizer(np.array([[s] for s in val_samples])).numpy()
 y_train = np.array(train_labels)
 y_val = np.array(val_labels)
 
-model.compile(loss=keras.losses.BinaryCrossentropy(from_logits=True),
-              optimizer=keras.optimizers.Adam(1e-4),
-              metrics=['accuracy'])
+#model.compile(loss=keras.losses.BinaryCrossentropy(from_logits=True),
+#              optimizer=keras.optimizers.Adam(1e-4),
+#              metrics=['accuracy'])
+model.compile(
+	    loss="sparse_categorical_crossentropy", optimizer="rmsprop", metrics=["acc"]
+	    )
 
-history = model.fit(x_train, y_train, epochs=10,
+
+history = model.fit(x_train, y_train, epochs=20,
                     validation_data=(x_val,y_val),
                     validation_steps=30)
 
@@ -107,6 +111,4 @@ test_loss, test_acc = model.evaluate(x_val,y_val)
 print('Test Loss:', test_loss)
 print('Test Accuracy:', test_acc)
 
-sample_text = ('no crime reported delhi')
-probabilities = model.predict(np.array([sample_text]))
-print(class_names[np.argmax(probabilities[0])-1])
+model.save("tweet_crime_non_crime_model")
