@@ -7,7 +7,6 @@ from preprocess_tweets import samples, labels, class_names
 from tensorflow.keras.layers import Embedding
 from tensorflow.keras import layers
 from tensorflow.keras import regularizers
-print(samples[0])
 
 # Shuffle the data
 seed = 1337
@@ -105,6 +104,10 @@ preds = model(x)
 end_to_end_model = keras.Model(string_input, preds)
 end_to_end_model.save("tweet_crime_classifier_model")
 
+test_loss, test_acc = model.evaluate(x_val, y_val)
+
+print('Test Loss:', test_loss)
+print('Test Accuracy:', test_acc)
 # probabilities = end_to_end_model.predict(
 #     [["bihar three masked person robbed jewellery shop gunpoint patna robbers entered shop presence customer one pointed gun attendant snatched gold chain hand an accused dropped gun shop probe said police"]]
 # )

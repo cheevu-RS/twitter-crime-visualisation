@@ -75,8 +75,7 @@ embedding_layer = Embedding(
 int_sequences_input = keras.Input(shape=(None,), dtype="int64")
 embedded_sequences = embedding_layer(int_sequences_input)
 
-x = layers.Conv1D(128, 3, activation="relu", kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4))(embedded_sequences)
-x = layers.Bidirectional(tf.keras.layers.LSTM(64,  return_sequences=True))(x)
+x = layers.Bidirectional(tf.keras.layers.LSTM(64,  return_sequences=True))(embedded_sequences)
 x = layers.Bidirectional(tf.keras.layers.LSTM(32))(x)
 x = layers.Dense(128, activation="relu",     
     kernel_regularizer=regularizers.l1_l2(l1=1e-5, l2=1e-4),
@@ -94,12 +93,9 @@ x_val = vectorizer(np.array([[s] for s in val_samples])).numpy()
 y_train = np.array(train_labels)
 y_val = np.array(val_labels)
 
-#model.compile(loss=keras.losses.BinaryCrossentropy(from_logits=True),
-#              optimizer=keras.optimizers.Adam(1e-4),
-#              metrics=['accuracy'])
 model.compile(
-	    loss="sparse_categorical_crossentropy", optimizer="rmsprop", metrics=["acc"]
-	    )
+    loss="sparse_categorical_crossentropy", optimizer="rmsprop", metrics=["acc"]
+)
 
 
 history = model.fit(x_train, y_train, epochs=20,
@@ -111,4 +107,5 @@ test_loss, test_acc = model.evaluate(x_val,y_val)
 print('Test Loss:', test_loss)
 print('Test Accuracy:', test_acc)
 
-model.save("tweet_crime_non_crime_model")
+probabilities = model.predict([["no crime reported delhi"]])
+print(class_names[np.argmax(probabilities[0])-1])
