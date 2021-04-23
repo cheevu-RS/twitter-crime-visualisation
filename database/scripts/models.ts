@@ -4,6 +4,13 @@ export interface Tweet {
   source: number;
   tweet: string;
 }
+export interface FilteredTweet {
+  id: number;
+  tweet_id: string;
+  source: number;
+  tweet: string;
+  is_ok: boolean;
+}
 
 export interface FilteredTweet {
   id: number;

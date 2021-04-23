@@ -24,6 +24,7 @@
   "homepage": "https://github.com/cheevu-RS/twitter-crime-visualisation#readme",
   "dependencies": {
     "knex": "^0.95.2",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "sqlite3": "^5.0.2"
   }
 }
