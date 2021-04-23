@@ -39,7 +39,6 @@ export const Theft = [
   "handbag taken",
   "shoplift",
   "shoplifting",
-  "boosting",
   "five finger discount",
   "shoplifter",
   "stealing",
@@ -50,7 +49,6 @@ export const Theft = [
   "thief",
   "lifting",
   "robbery",
-  "threat",
   "armed robbery",
   "highway robbery",
   "aggravated robbery",
@@ -91,7 +89,8 @@ export const DrugOffences = [
   "amphetamine",
   "ketamine",
   "ganja",
-  "marijuana"
+  "marijuana",
+  "trafficking"
 ];
 
 export const PossessionOfWeapons = [
@@ -182,7 +181,6 @@ export const CyberCrime = [
   "bioterrorism",
   "copyright infringement",
   "child porn",
-  "porn",
   "ddos",
   "piracy",
   "pirating",
@@ -192,6 +190,7 @@ export const CyberCrime = [
   "hacking",
   "dark web",
   "silk road",
+  "malicious"
 ];
 
 export const Terrorism = [
@@ -203,7 +202,8 @@ export const Terrorism = [
   "taliban",
   "naxal",
   "indian mujahideen",
-  "maoist"
+  "maoist",
+  "bomb"
 ];
 
 export const NonCrime = [];
